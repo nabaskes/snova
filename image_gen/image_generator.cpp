@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
-#include <ofstream>
+#include <fstream>
+#include <iostream>
 
 class ImageGenerator {
   int r, c;
@@ -17,8 +18,12 @@ public:
     std::ofstream output;
     output.open(outpath.c_str());
 
-    output << 'P2\n';
-    output << image.size() << ' ' << image[0].size() << '\n';
+    std::cout << "P2\n";
+    std::cout << image.size() << ' ' << image[0].size() << "\n";
+    return;
+
+    output << "P2\n";
+    output << image.size() << ' ' << image[0].size() << "\n";
 
   }
 };

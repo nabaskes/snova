@@ -18,7 +18,7 @@ public:
 
     std::ofstream output;
     std::string path = outpath + ".pgm";
-    output.open(outpath.c_str());
+    output.open(path.c_str());
     output << "P2\n";
     output << image.size() << ' ' << image[0].size() << "\n";
     output << "255 \n";

@@ -44,6 +44,7 @@ std::vector<std::vector<double>> calc_heat(int rows,
   ImageGenerator i_gen (rows, cols);
   double alpha = (4/(2 + sqrt(4 - (2*cos(M_PI/N))))) - 1;
   std::vector<int>::iterator time_it = print_times.begin();
+  double uu = 0.0;
 
   // now, do the primary iteration
   for(int t=0; t<duration; t++) {
@@ -59,7 +60,13 @@ std::vector<std::vector<double>> calc_heat(int rows,
       time_it++;
     }
 
-
+    // iterate the universe
+    for (int i=1; i<rows-1; i++) {
+      for (int j=1; j<cols-1; j++) {
+	uu = .25 * (universe[i+1][j] + universe[i-1][j]+universe[i][j+1]+universe[i][j-1]);
+	universe[i][j] = uu + alpha * (uu - universe[i][j]);
+      }
+    }
   }
 
   return universe;

@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <math.h>
 
 class ImageGenerator {
   int r, c;
@@ -16,14 +17,21 @@ public:
 		      std::vector<std::vector<double>> image) {
 
     std::ofstream output;
+    std::string path = outpath + ".pgm";
     output.open(outpath.c_str());
-
-    std::cout << "P2\n";
-    std::cout << image.size() << ' ' << image[0].size() << "\n";
-    return;
-
     output << "P2\n";
     output << image.size() << ' ' << image[0].size() << "\n";
+    output << "255 \n";
 
+    for (int i=0; i<r; i++) {
+      for (int j=0; j<c; j++) {
+	if (j != 0) {
+	  output << " ";
+	}
+	output << std::to_string((int)std::round(image[i][j]));
+      }
+      output << "\n";
+    }
+    output.close();
   }
 };

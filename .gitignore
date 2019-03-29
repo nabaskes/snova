@@ -1,3 +1,4 @@
 *.ppm
 *.pgm
 a.out
+*#*

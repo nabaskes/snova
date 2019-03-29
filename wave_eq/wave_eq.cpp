@@ -40,6 +40,10 @@ std::vector<std::vector<double>> calc_wave(int rows,
   ImageGenerator i_gen (rows, cols);
   std::vector<int>::iterator time_it = print_times.begin();
   double uu = 0.0;
+  double hx = 0.01; // assume that discretization is same size in x and y
+  double ht = 0.001;
+  double c = 1.0;
+  double lambda = c * c * ht * ht / (hx * hx);
 
   // do the primary iteration
   for (int t=0; t<duration; t++) {
@@ -58,13 +62,10 @@ std::vector<std::vector<double>> calc_wave(int rows,
       } else {
 	i_gen.generate_image(path, odd_u);
       }
+      time_it++;
     }
 
     // iterate the universe
-    double hx = 0.01;
-    double ht = 0.01;
-    double c = 1.0;
-    double lambda = c * c * ht * ht / (hx * hx);
 
     for (int i=1; i<rows-1; i++) {
       for (int j=1; j<cols-1; j++) {
@@ -77,11 +78,11 @@ std::vector<std::vector<double>> calc_wave(int rows,
 	   Unfortunately it makes the code a little bit confusing
 	*/
 	if ( (duration & 1) == 0){
-	  uu = lambda * (even_u[i-1][j] + even_u[i][j-1] + odd_u[i+1][j] + odd_u[i][j+1] - 4 * even_u[i][j]);
-	  even_u[i][j] =  2 * even_u[i][j] + uu - odd_u[i][j];
+	  uu = lambda * (even_u[i-1][j] + even_u[i][j-1] + odd_u[i+1][j] + odd_u[i][j+1] - 4 * odd_u[i][j]);
+	  even_u[i][j] =  2 * odd_u[i][j] + uu - even_u[i][j];
 	} else {
-	  uu = lambda * (odd_u[i-1][j] + odd_u[i][j-1] + even_u[i+1][j] + even_u[i][j+1] - 4 * odd_u[i][j]);
-	  odd_u[i][j] = 2 * odd_u[i][j] + uu - even_u[i][j];
+	  uu = lambda * (odd_u[i-1][j] + odd_u[i][j-1] + even_u[i+1][j] + even_u[i][j+1] - 4 * even_u[i][j]);
+	  odd_u[i][j] = 2 * even_u[i][j] + uu - odd_u[i][j];
 	}
 
 

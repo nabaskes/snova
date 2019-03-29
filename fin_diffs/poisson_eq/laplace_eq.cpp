@@ -25,4 +25,5 @@ public:
 				  int j) {
     return universe[i][j] = .5 * (universe[i-1][j] + universe[i][j-1]);
   }
+
 };

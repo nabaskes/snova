@@ -1,6 +1,6 @@
 #include <vector>
 #include <tuple>
-#include "../heat_eq/heat_eq.cpp"
+#include "../fin_diffs/heat_eq/heat_eq.cpp"
 #include "../boundary_conds/boundaries.cpp"
 
 

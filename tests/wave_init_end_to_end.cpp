@@ -1,6 +1,6 @@
 #include <vector>
 #include <tuple>
-#include "../wave_eq/wave_eq.cpp"
+#include "../fin_diffs/wave_eq/wave_eq.cpp"
 #include "../boundary_conds/boundaries.cpp"
 
 int main() {

@@ -9,7 +9,7 @@ prints out solution to 2D wave equation at a given time
 #include <string>
 #include <tuple>
 #include <math.h>
-#include "../image_gen/image_generator.cpp"
+#include "../../image_gen/image_generator.cpp"
 
 template <class T> const T& max (const T& a, const T& b) {
   return (a<b) ? b : a;

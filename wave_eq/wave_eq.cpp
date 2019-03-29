@@ -63,14 +63,25 @@ std::vector<std::vector<double>> calc_wave(int rows,
     // iterate the universe
     double hx = 0.01;
     double ht = 0.01;
+    double c = 1.0;
+    double lambda = c * c * ht * ht / (hx * hx);
 
     for (int i=1; i<rows-1; i++) {
       for (int j=1; j<cols-1; j++) {
 
+	/*
+	   this whole even - odd thing allows us to store previous data,
+	   which is needed for the backwards time steps in the finite difference
+
+	   This method allows us to avoid copying the entire universe every step
+	   Unfortunately it makes the code a little bit confusing
+	*/
 	if ( (duration & 1) == 0){
-
+	  uu = lambda * (even_u[i-1][j] + even_u[i][j-1] + odd_u[i+1][j] + odd_u[i][j+1] - 4 * even_u[i][j]);
+	  even_u[i][j] =  2 * even_u[i][j] + uu - odd_u[i][j];
 	} else {
-
+	  uu = lambda * (odd_u[i-1][j] + odd_u[i][j-1] + even_u[i+1][j] + even_u[i][j+1] - 4 * odd_u[i][j]);
+	  odd_u[i][j] = 2 * odd_u[i][j] + uu - even_u[i][j];
 	}
 
 

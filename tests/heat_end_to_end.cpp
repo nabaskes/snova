@@ -5,7 +5,6 @@
 
 
 int main() {
-
   int rows = 100;
   int cols = 100;
 
@@ -40,7 +39,6 @@ int main() {
   top_row.add_boundary(bot_row);
   top_row.add_boundary(left_col);
   top_row.add_boundary(right_col);
-
   boundary_conds = top_row.get_conditions();
 
   std::vector<std::vector<double>> init_conds;
@@ -54,5 +52,6 @@ int main() {
     init_conds.push_back(row);
   }
 
-  calc_heat(rows, cols, 10000, "endtoend", print_times, boundary_conds, init_conds);
+  HeatSimulator sim (rows, cols, boundary_conds, init_conds);
+  sim.calculate(10000, "end_to_end", print_times);
 }

@@ -20,10 +20,10 @@ public:
     return;
   }
 
-  double iterate_forward_fin_diff(std::vector<std::vector<double>> universe,
+  double iterate_forward_fin_diff(std::vector<std::vector<double>>* universe,
 				  int i,
 				  int j) {
-    return universe[i][j] = .5 * (universe[i-1][j] + universe[i][j-1]);
+    return .5 * ((*universe)[i-1][j] + (*universe)[i][j-1]);
   }
 
 };

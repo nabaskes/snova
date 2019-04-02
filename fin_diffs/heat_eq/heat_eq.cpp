@@ -22,6 +22,6 @@ public:
 				  int i,
 				  int j) {
     double uu = .25 * ((*universe)[i+1][j] + (*universe)[i-1][j]+(*universe)[i][j+1]+(*universe)[i][j-1]);
-    return (*universe)[i][j] = uu + alpha * (uu - (*universe)[i][j]);
+    return uu + alpha * (uu - (*universe)[i][j]);
   }
 };

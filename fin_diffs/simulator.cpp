@@ -32,10 +32,10 @@ public:
     initials = init_conds;
   }
 
-  double iterate_forward_fin_diff(std::vector<std::vector<double>> universe,
+  virtual double iterate_forward_fin_diff(std::vector<std::vector<double>>* universe,
 				  int i,
 				  int j) {
-    return universe[i][j];
+    return (*universe)[i][j];
   }
 
   std::vector<std::vector<double>> calculate(int duration,
@@ -71,7 +71,7 @@ public:
 
       for (int i=1; i<r-1; i++) {
 	for (int j=1; j<c-1; j++) {
-	  u[i][j] = iterate_forward_fin_diff(u, i, j);
+	  u[i][j] = iterate_forward_fin_diff(&u, i, j);
 	}
       }
     }
